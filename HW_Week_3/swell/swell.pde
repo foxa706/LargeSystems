@@ -1,7 +1,7 @@
-import ddf.minim.*;
+//import ddf.minim.*;
 
-Minim minim;
-AudioPlayer surf;
+//Minim minim;
+//AudioPlayer surf;
 
 JSONObject json;
 String key = "73f221c1438fe228567fbace5e12b";
@@ -15,13 +15,21 @@ void setup() {
   JSONObject zero = hourly.getJSONObject(0);
   float swellHt = zero.getFloat("swellHeight_m");
   
-  minim = new Minim(this);
-  surf = minim.loadFile("surf.mp3", 2048);
+  //minim = new Minim(this);
+  //surf = minim.loadFile("surf.mp3", 2048);
   
   println("swell height is ");
   print(swellHt);
   print("meters high");
   
 }
+void draw(){
+  if (keyPressed && key == "s") {
+    println("pressed");
+    //surf.setVolume(x);
+    //surf.loop();
 
+  }
+}
+//
 //  to do: if ( ht < 0.2 ) surf.loop();
