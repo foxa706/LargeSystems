@@ -1,5 +1,5 @@
 /**
-
+  marine weather data from 
   Minim Gain code author: Damien Di Fede
 */
 
@@ -15,7 +15,7 @@ AudioOutput out;
 // and changing the value assigned to fileName here.
 String waveAudio = "surf.mp3";
 JSONObject json;
-String key = "73f221c1438fe228567fbace5e12b";
+String key = "x";
 float mapSwell;
 
 void setup()
