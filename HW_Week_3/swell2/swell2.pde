@@ -1,6 +1,6 @@
 /**
-  marine weather data from 
-  Minim Gain code author: Damien Di Fede
+  marine weather data from world weather online
+  Minim Gain code resource Damien Di Fede
 */
 
 import ddf.minim.*;
