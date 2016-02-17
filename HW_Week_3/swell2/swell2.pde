@@ -40,7 +40,7 @@ void setup()
   JSONArray data = json.getJSONObject("data").getJSONArray("weather");
   JSONObject weatherRaw = data.getJSONObject(0);
   JSONArray hourly = weatherRaw.getJSONArray("hourly");
-  print(hourly);
+  //print(hourly);
   JSONObject zero = hourly.getJSONObject(7);
   float swellHt = zero.getFloat("swellHeight_m");
   mapSwell = swellHt;
