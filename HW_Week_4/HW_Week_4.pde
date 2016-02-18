@@ -34,7 +34,7 @@ void setup() {
    * and the port of the remote location address are the same, hence you will
    * send messages back to this sketch.
    */
-  myRemoteLocation = new NetAddress("149.31.126.128",12000);
+  myRemoteLocation = new NetAddress("your_ip_here",12000);
 }
 
 
