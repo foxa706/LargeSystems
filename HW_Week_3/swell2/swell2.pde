@@ -11,11 +11,9 @@ FilePlayer filePlayer;
 Gain       gain;
 AudioOutput out;
 
-// you can use your own file by putting it in the data directory of this sketch
-// and changing the value assigned to fileName here.
 String waveAudio = "surf.mp3";
 JSONObject json;
-String key = "x";
+String key = "key";
 float mapSwell;
 
 void setup()
@@ -26,13 +24,10 @@ void setup()
   filePlayer = new FilePlayer( minim.loadFileStream(waveAudio) );
   filePlayer.loop();
   
-  // start the Gain at 0 dB, which means no change in amplitude
+  // 0 dB, no change in amplitude
   gain = new Gain(0.f);
   
-  // get a line out from Minim. It's important that the file is the same audio format 
-  // as our output (i.e. same sample rate, number of channels, etc).
-  out = minim.getLineOut();
-  
+  out = minim.getLineOut();  
   // patch the file player to the output
   filePlayer.patch(gain).patch(out);
   
