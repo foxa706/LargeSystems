@@ -1,4 +1,4 @@
-//player 2
+//Player 1
 //OSC Pong Midterm - Audrey Fox
 //Large Systems 
 //Spring 2016
@@ -14,8 +14,11 @@ int bY = 3;
 
 float speedX = random(3,5);
 float speedY = random(3,5);
+
 float ballX = 250.0,
       ballY = 250.0;
+float sendBallx = ballX/4, sendBally = ballY/4;
+
 float player1x, player1y;
 float player2x, player2y;
 
@@ -29,16 +32,26 @@ void setup(){
 void draw(){
   background(210, 135, 237);//purpleish
   Client c = s.available();
+  float bufferY = (mouseY-50)/4;
   
-  if(c != null) {
-    byte[] buffer = new byte[4];
-    c.readBytes(buffer);
-    player1x = buffer[X];
-    player1y = buffer[Y]*4;
-    ballX = buffer[bX]*4;
-    ballY = buffer[bY]*4;
-    println(buffer);
-  }
+  byte[] bufferOut = new byte[4];
+
+  
+  bufferOut[X] = (byte)0;
+  bufferOut[Y] = (byte)bufferY;
+  bufferOut[bX] = (byte)sendBallx;
+  bufferOut[bY] = (byte)sendBally;
+  c.write(bufferOut);
+  
+  //if(c.available() < 0) {
+  //  byte[] bufferIn = new byte[4];
+  //  c.readBytes(bufferIn);
+  //  player1x = bufferIn[X];
+  //  player1y = bufferIn[Y]*4;
+  //  ballX = bufferIn[bX]*4;
+  //  ballY = bufferIn[bY]*4;
+  //  println(bufferIn);
+  //}
     
     ellipse(ballX, ballY, 20, 20);
     fill(135, 212, 237);//lt blue
