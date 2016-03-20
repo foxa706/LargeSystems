@@ -16,34 +16,35 @@ float speedX = random(3,5);
 float speedY = random(3,5);
 
 float ballX = 250.0,
-      ballY = 250.0;
-float sendBallx = ballX/4, sendBally = ballY/4;
+      ballY = 250.0,
+      updateBallY = ballY /4,
+      updateBallX = ballX /4;
+float sendBallx = updateBallX, sendBally = updateBallY;
 
 float player1x, player1y;
 float player2x, player2y;
 
 void setup(){
   c = new Client(this, "127.0.0.1", 1234);
-  s = new Server(this, 1234);   
   size(500, 500);
   ellipseMode(CENTER);
   noStroke();
 }
 void draw(){
   background(210, 135, 237);//purpleish
-  Client c = s.available();
-  float bufferY = (mouseY-50)/4;
-  
-  byte[] bufferOut = new byte[4];
+  //Client c = s.available();--from p 2
+  c = new Client(this, "127.0.0.1", 1234);
+  float mouseBuffY = (mouseY-50)/4;
+  byte[] buffer = new byte[4];
 
   
-  bufferOut[X] = (byte)0;
-  bufferOut[Y] = (byte)bufferY;
-  bufferOut[bX] = (byte)sendBallx;
-  bufferOut[bY] = (byte)sendBally;
-  c.write(bufferOut);
+  buffer[X] = (byte)0;
+  buffer[Y] = (byte)mouseBuffY;
+  buffer[bX] = (byte)sendBallx;
+  buffer[bY] = (byte)sendBally;
+  c.write(buffer);
   
-  //if(c.available() < 0) {
+  //if(c.available() < 0) {--p 2
   //  byte[] bufferIn = new byte[4];
   //  c.readBytes(bufferIn);
   //  player1x = bufferIn[X];

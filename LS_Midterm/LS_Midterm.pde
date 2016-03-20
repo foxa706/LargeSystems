@@ -1,4 +1,4 @@
-//player 2
+//Player 2
 //OSC Pong Midterm - Audrey Fox
 //Large Systems 
 //Spring 2016
@@ -20,7 +20,6 @@ float player1x, player1y;
 float player2x, player2y;
 
 void setup(){
-  c = new Client(this, "127.0.0.1", 1234);
   s = new Server(this, 1234);   
   size(500, 500);
   ellipseMode(CENTER);
