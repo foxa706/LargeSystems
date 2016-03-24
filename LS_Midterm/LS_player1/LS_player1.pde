@@ -1,10 +1,9 @@
-//Player 1
+//Player 1 -- CLIENT
 //OSC Pong Midterm - Audrey Fox
 //Large Systems 
 //Spring 2016
 import processing.net.*;
 Client c;
-Server s;
 
 // buffer index
 int X = 0;
@@ -43,16 +42,17 @@ void draw(){
   buffer[bX] = (byte)sendBallx;
   buffer[bY] = (byte)sendBally;
   c.write(buffer);
+  //println(buffer);
   
-  //if(c.available() < 0) {--p 2
-  //  byte[] bufferIn = new byte[4];
-  //  c.readBytes(bufferIn);
-  //  player1x = bufferIn[X];
-  //  player1y = bufferIn[Y]*4;
-  //  ballX = bufferIn[bX]*4;
-  //  ballY = bufferIn[bY]*4;
-  //  println(bufferIn);
-  //}
+  if(c.available() > 0) {
+  byte[] bufferIn = new byte[4];
+  c.readBytes(bufferIn);
+  //player1x = bufferIn[X];
+  //player1y = bufferIn[Y]*4;
+  //ballX = bufferIn[bX]*4;
+  //ballY = bufferIn[bY]*4;
+  println(bufferIn);
+  }
     
     ellipse(ballX, ballY, 20, 20);
     fill(135, 212, 237);//lt blue
@@ -85,4 +85,12 @@ void draw(){
       speedY = speedY * -1.0;
       ballY = ballY + speedY;
     }
+
+    //if the ball goes off screen
+     if (ballX < 0 || ballX > width) {
+      speedY = speedY * (random(1)*-1.0);
+      ballY = 250;
+      ballX = 250;
+    }
  }
+ 
