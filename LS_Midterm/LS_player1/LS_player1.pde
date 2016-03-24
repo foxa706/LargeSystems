@@ -16,8 +16,8 @@ float speedY = random(3,5);
 
 float ballX, ballY;
 
-float player1x, player1y;
-float player2x, player2y;
+float player1x = 490, player1y;
+float player2x = 0, player2y;
 
 void setup(){
   c = new Client(this, "127.0.0.1", 1234);
@@ -28,9 +28,9 @@ void setup(){
 
 void draw(){
   background(210, 135, 237);//purpleish
-  //Client c = s.available();--from p 2
+  //send
   c = new Client(this, "127.0.0.1", 1234);
-  float mouseBuffY = (mouseY-50)/4,
+  float p1BuffY = (mouseY-50)/4,
         updateBallY = ballY /4,
         updateBallX = ballX /4;
   float sendBallx = updateBallX, sendBally = updateBallY;
@@ -39,12 +39,13 @@ void draw(){
   float sendP1x=player1x/4;
   
   buffer[X] = (byte)sendP1x;
-  buffer[Y] = (byte)mouseBuffY;
+  buffer[Y] = (byte)p1BuffY;
   buffer[bX] = (byte)sendBallx;
   buffer[bY] = (byte)sendBally;
   c.write(buffer);
   println(buffer);
   
+  //read
   if(c.available() > 0) {
   byte[] bufferIn = new byte[4];
   c.readBytes(bufferIn);
@@ -60,7 +61,7 @@ void draw(){
     ballX = ballX + speedX;
     ballY = ballY + speedY;
     
-    player1x= width-10;
+    
     player1y= mouseY-50;
   
     rect(player1x, player1y, 10, 100);//player1
