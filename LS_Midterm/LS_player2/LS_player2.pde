@@ -9,7 +9,13 @@ int bX = 2;
 int bY = 3;
 
 float player1x, player1y;
-float ballX, ballY;
+float player2x, player2y;
+
+float ballX, ballY,
+      p1BallX, p1BallY,
+      qBallY = ballY /4,
+      qBallX = ballX /4;
+float sendBallx = qBallX, sendBally = qBallY;
 
 
 void setup() {
@@ -19,17 +25,15 @@ void setup() {
 
 void draw() {
   //send
-  byte[] buffer = new byte[4];
-  //buffer[X] = (byte)mouseX;
-  //buffer[Y] = (byte)mouseY;
-  //float byteY = (mouseY-50)/4;
+  //byte[] buffer = new byte[4];
+  //float mouseBuffy = (mouseY-50)/4;
   
-  buffer[X] = (byte)0;
-  buffer[Y] = (byte)1;
-  buffer[bX] = (byte)2;
-  buffer[bY] = (byte)3;
+  //buffer[X] = (byte)0;
+  //buffer[Y] = (byte)mouseBuffy;
+  //buffer[bX] = (byte)sendBallx;
+  //buffer[bY] = (byte)sendBally;
   
-  s.write(buffer);
+  //s.write(buffer);
   
   //recieve
   Client c = s.available();
@@ -38,12 +42,20 @@ void draw() {
     c.readBytes(bufferIn);
     player1x = bufferIn[X];
     player1y = bufferIn[Y]*4;
-    ballX = bufferIn[bX]*4;
-    ballY = bufferIn[bY]*4;
+    p1BallX = bufferIn[bX]*4;
+    p1BallY = bufferIn[bY]*4;
     println(bufferIn);
     }
   
   println("Player1:  " + player1x + "X, " + player1y + "Y");
-  println("Ball: " + ballX +"X, "+ ballY + "Y");
-  
+  println("Ball: " + p1BallX +"X, "+ p1BallY + "Y");
+  //------------------
+  background(210, 135, 237);
+  ballX = p1BallX;
+  ballY = p1BallY;
+  ellipse(ballX, ballY, 20, 20);
+  fill(135, 212, 237);
+  //ballX = ballX + speedX;
+  //ballY = ballY + speedY;
+    
 }

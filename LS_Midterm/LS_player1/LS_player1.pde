@@ -14,11 +14,7 @@ int bY = 3;
 float speedX = random(3,5);
 float speedY = random(3,5);
 
-float ballX = 250.0,
-      ballY = 250.0,
-      updateBallY = ballY /4,
-      updateBallX = ballX /4;
-float sendBallx = updateBallX, sendBally = updateBallY;
+float ballX, ballY;
 
 float player1x, player1y;
 float player2x, player2y;
@@ -33,7 +29,11 @@ void draw(){
   background(210, 135, 237);//purpleish
   //Client c = s.available();--from p 2
   c = new Client(this, "127.0.0.1", 1234);
-  float mouseBuffY = (mouseY-50)/4;
+  float mouseBuffY = (mouseY-50)/4,
+        updateBallY = ballY /4,
+        updateBallX = ballX /4;
+  float sendBallx = updateBallX, sendBally = updateBallY;
+
   byte[] buffer = new byte[4];
 
   
@@ -42,17 +42,17 @@ void draw(){
   buffer[bX] = (byte)sendBallx;
   buffer[bY] = (byte)sendBally;
   c.write(buffer);
-  //println(buffer);
+  println(buffer);
   
-  if(c.available() > 0) {
-  byte[] bufferIn = new byte[4];
-  c.readBytes(bufferIn);
+  //if(c.available() > 0) {
+  //byte[] bufferIn = new byte[4];
+  //c.readBytes(bufferIn);
   //player1x = bufferIn[X];
   //player1y = bufferIn[Y]*4;
   //ballX = bufferIn[bX]*4;
   //ballY = bufferIn[bY]*4;
-  println(bufferIn);
-  }
+  //println(bufferIn);
+  //}
     
     ellipse(ballX, ballY, 20, 20);
     fill(135, 212, 237);//lt blue
