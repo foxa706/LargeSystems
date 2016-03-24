@@ -25,6 +25,7 @@ void setup(){
   ellipseMode(CENTER);
   noStroke();
 }
+
 void draw(){
   background(210, 135, 237);//purpleish
   //Client c = s.available();--from p 2
@@ -35,32 +36,32 @@ void draw(){
   float sendBallx = updateBallX, sendBally = updateBallY;
 
   byte[] buffer = new byte[4];
-
+  float sendP1x=player1x/4;
   
-  buffer[X] = (byte)0;
+  buffer[X] = (byte)sendP1x;
   buffer[Y] = (byte)mouseBuffY;
   buffer[bX] = (byte)sendBallx;
   buffer[bY] = (byte)sendBally;
   c.write(buffer);
   println(buffer);
   
-  //if(c.available() > 0) {
-  //byte[] bufferIn = new byte[4];
-  //c.readBytes(bufferIn);
-  //player1x = bufferIn[X];
-  //player1y = bufferIn[Y]*4;
+  if(c.available() > 0) {
+  byte[] bufferIn = new byte[4];
+  c.readBytes(bufferIn);
+  player2x = bufferIn[X];
+  player2y = bufferIn[Y]*4;
   //ballX = bufferIn[bX]*4;
   //ballY = bufferIn[bY]*4;
-  //println(bufferIn);
-  //}
+  println(bufferIn);
+  }
     
     ellipse(ballX, ballY, 20, 20);
     fill(135, 212, 237);//lt blue
     ballX = ballX + speedX;
     ballY = ballY + speedY;
     
-    player2x= width-10;
-    player2y= mouseY-50;
+    player1x= width-10;
+    player1y= mouseY-50;
   
     rect(player1x, player1y, 10, 100);//player1
     rect(player2x, player2y, 10, 100);//player2
